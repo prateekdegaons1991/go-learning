@@ -19,24 +19,23 @@ type Person struct {
 
 func main() {
 
-	alex := Person{
+	p := Person{
 		firstName: "Pratik",
 		lastName:  "Degaon",
 		age:       32,
-		email:     "pratikdegaon@gmail.com",
 		contactInfo: contactInfo{
 			email: "pratikdegaon@gmail.com",
 			phone: "7411455742",
 		},
 	}
 
-	alex.updateName("Eshita")
-	alex.Print()
+	p.updateName("Eshita")
+	p.Print()
+}
+func (pointerToPerson *Person) updateName(newName string) {
+	(*pointerToPerson).firstName = newName
+}
 
-}
-func (p Person) updateName(newName string) {
-	p.firstName = newName
-}
 func (p Person) Print() {
-	fmt.Printf("%v\n", p)
+	fmt.Printf("%+v\n", p)
 }
