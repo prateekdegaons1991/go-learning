@@ -17,7 +17,18 @@ func writeBalanceToFile(balance float64) {
 func readBalanceFromFile() (float64, error) {
 	data, err := os.ReadFile(accountBalanceFileName)
 	if err != nil {
-		return 1000, errors.New("failed to read balance file")
+		// return 1000, errors.New("failed to read balance file")
+		fmt.Println("File does not exist. Would you like to create a new balance file? (y/n)")
+		var createNewBalanceFile string
+		fmt.Scan(&createNewBalanceFile)
+		if createNewBalanceFile == "y" {
+			writeBalanceToFile(1000)
+			return readBalanceFromFile()
+		}
+
+		if createNewBalanceFile == "n" {
+			return 1000, errors.New("failed to read balance file")
+		}
 	}
 
 	balance, err := strconv.ParseFloat(string(data), 64)
