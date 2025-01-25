@@ -4,12 +4,13 @@ import (
 	"fmt"
 
 	"example.com/bank/fileops"
+	"github.com/Pallinder/go-randomdata"
 )
 
 const accountBalanceFile = "balance.txt"
 
 func main() {
-	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile)
+	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile) //remember casing is important in Go for public functions when using via other packages
 
 	if err != nil {
 		fmt.Println("ERROR")
@@ -18,7 +19,8 @@ func main() {
 		// panic("Can't continue, sorry.")
 	}
 
-	fmt.Println("Welcome to Go Bank!")
+	fmt.Println("Welcome to " + randomdata.City() + " Bank")
+	fmt.Println("Reach us at " + randomdata.Email() + " or " + randomdata.PhoneNumber())
 
 	for {
 		fmt.Println("What do you want to do?")
