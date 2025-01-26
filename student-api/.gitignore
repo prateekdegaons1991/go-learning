@@ -25,3 +25,6 @@ go.sum
 
 # Storage File
 storage/*
+
+# Log File
+log/*
