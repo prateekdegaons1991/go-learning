@@ -6,19 +6,6 @@ import (
 	"time"
 )
 
-func GetUserData(promtText string) string {
-	var userInput string
-	fmt.Print(promtText)
-	fmt.Scanln(&userInput)
-	return userInput
-}
-
-//write getuserdetails outputnction, and this fucntion will take input fro struct
-
-func (u *Person) OutputUserDetails() {
-	fmt.Println("User details:", u.firstName, u.lastName, u.age, u.createdAt, u.contactInfo.email, u.contactInfo.phone)
-}
-
 type Admin struct {
 	password string
 	isActive bool
@@ -42,7 +29,7 @@ type Person struct {
 
 func NewPerson(firstName string, lastName string, age int, email string, phone string) (*Person, error) {
 
-	if firstName == "" || lastName == "" || email == "" || phone == "" {
+	if firstName == "" || lastName == "" {
 		fmt.Println("All fields are required.")
 		return nil, errors.New("all fields are required")
 	}
@@ -65,4 +52,17 @@ func NewPerson(firstName string, lastName string, age int, email string, phone s
 			phone: phone,
 		},
 	}, nil
+}
+
+func GetUserData(promtText string) string {
+	var userInput string
+	fmt.Print(promtText)
+	fmt.Scanln(&userInput)
+	return userInput
+}
+
+//write getuserdetails outputnction, and this fucntion will take input fro struct
+
+func (u *Person) OutputUserDetails() {
+	fmt.Println("User details:", u.firstName, u.lastName, u.age, u.createdAt, u.contactInfo.email, u.contactInfo.phone)
 }
