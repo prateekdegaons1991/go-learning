@@ -36,7 +36,7 @@ func main() {
 	}
 
 	urls := make(map[string]string)
-	urls["Google"] = "https://www.google.com"
+	urls["google"] = "https://www.google.com"
 	urls["en"] = "https://www.google.com/en"
 	urls["es"] = "https://www.google.com/es"
 	urls["fr"] = "https://www.google.com/fr"
@@ -47,5 +47,9 @@ func main() {
 	// Get German url
 
 	fmt.Println("Get value german: ", urls["de"])
+
+	for key, value := range urls {
+		fmt.Printf("For Key: %v"+" Value: %v\n", key, value)
+	}
 
 }

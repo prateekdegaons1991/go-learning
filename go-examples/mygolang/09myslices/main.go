@@ -63,7 +63,7 @@ func main() {
 			break
 		}
 	}
-	courses2 = append(courses2[:indexToRemove2], courses2[indexToRemove2+1:]...)
+	courses2 = append(courses2[:indexToRemove2], courses2[indexToRemove2+1:]...) // last value will not inclussive
 	fmt.Printf("Courses2 after removing %v: %v\n", valueToRemove, courses2)
 
 }
