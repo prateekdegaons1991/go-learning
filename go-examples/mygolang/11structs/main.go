@@ -9,52 +9,27 @@ func main() {
 
 	fmt.Println("Structs in golang")
 
-	firstName, err := getUserData("Enter your first name: ")
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return
-	}
-	lastName, err := getUserData("Enter your last name: ")
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return
-	}
-	age, err := getUserData("Enter your age: ")
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return
-	}
-	email, err := getUserData("Enter your email: ")
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return
-	}
+	Pratik := User{"Pratik", "pratikdegaon@gmail.com", true, 24}
+	var Eshita *User = &User{"Eshita", "eshita@gmail.com", true, 23}
 
-	PratikUserData := User{
-		Name:      firstName,
-		LastName:  lastName,
-		Email:     email,
-		Status:    true,
-		Age:       age,
-		createdAt: time.Now().Truncate(time.Second),
-	}
+	fmt.Println(*Eshita)
+	fmt.Println(Pratik)
 
-	outputUserDetails(&PratikUserData)
+	Pratik.Name = "Pratik English"
 
-	PratikUserData.isUserActive()
-	fmt.Println("Is user active: ", PratikUserData.isUserActive())
+	fmt.Println(Pratik)
 
+	// lets create pointer to struct
+
+	var PratikPointer *User
+	PratikPointer = &Pratik
+	PratikPointer.Name = "Pratik Degaonkar"
+	fmt.Println(*PratikPointer)
 
 }
 
-// pointers
-// In Go, pointers are variables that store the memory address of another variable.
-
-func outputUserDetails(u *User) {
-	fmt.Println("User Details: ")
-	fmt.Println("Name: ", u.Name, "", u.LastName, " Age: ", u.Age, " Email: ", u.Email, " Status: ", u.Status, " Created At: ", u.createdAt)
-}
-
+// Capital letters are exported
+// Structs are used to create a collection of fields
 type User struct {
 	Name      string
 	LastName  string
