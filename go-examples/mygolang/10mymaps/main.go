@@ -35,4 +35,17 @@ func main() {
 		fmt.Printf("For Key: %v\n"+" Value: %v\n", value, key)
 	}
 
+	urls := make(map[string]string)
+	urls["Google"] = "https://www.google.com"
+	urls["en"] = "https://www.google.com/en"
+	urls["es"] = "https://www.google.com/es"
+	urls["fr"] = "https://www.google.com/fr"
+	urls["de"] = "https://www.google.com/de"
+	// Printing the map
+	fmt.Println("List of urls: ", urls)
+	// Accessing a map
+	// Get German url
+
+	fmt.Println("Get value german: ", urls["de"])
+
 }
