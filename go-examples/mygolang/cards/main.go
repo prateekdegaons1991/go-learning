@@ -1,15 +1,12 @@
 package main
 
-import "fmt"
-
 func main() {
-	cards := newDeckFromFile("MyCards")
+	cards := deck{"Ace of Spades", newCard()}
+	cards = append(cards, "Six of Hearts")
 
-	// hand, reminingCards := deal(cards, 5)
+	cards.print()
+}
 
-	// hand.print()
-	// reminingCards.print()
-	fmt.Println(cards)
-	// cards.saveToFile("MyCards2")
-	fmt.Println(deal(cards, 5))
+func newCard() string {
+	return "Five of Diamonds"
 }
