@@ -9,8 +9,9 @@ func main() {
 
 	fmt.Println("Structs in golang")
 
-	Pratik := User{"Pratik", "pratikdegaon@gmail.com", true, 24}
-	var Eshita *User = &User{"Eshita", "eshita@gmail.com", true, 23}
+	Pratik := User{"Pratik", "Degaonkar", "pratikdegaon@gmail.com", true, "24", time.Now()}
+	var Eshita *User = &User{"Eshita", "", "eshita@gmail.com", true, "23", time.Now()}
+	
 
 	fmt.Println(*Eshita)
 	fmt.Println(Pratik)
