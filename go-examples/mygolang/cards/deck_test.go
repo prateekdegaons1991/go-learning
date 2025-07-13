@@ -3,6 +3,9 @@ package main
 import (
 	"os"
 	"testing"
+
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
 // test to see the deck has 52 cards
@@ -42,3 +45,14 @@ func TestSaveToFileAndNewDeckFromFile(t *testing.T) {
 	}
 	os.Remove("_decktesting")
 }
+
+// write testcase using ginkgo and gomega to test if deck has 52 cards
+
+var _ = Describe("Deck", func() {
+	Context("NewDeck", func() {
+		It("should have 52 cards", func() {
+			deck := newDeck()
+			Expect(len(deck)).To(Equal(52))
+		})
+	})
+})

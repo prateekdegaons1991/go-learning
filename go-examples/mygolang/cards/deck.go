@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Create a new type of 'deck'
+// Create a custom new type of 'deck'
 // which is a slice of strings
 
 type deck []string
@@ -33,7 +33,7 @@ func (d deck) print() {
 }
 
 func deal(d deck, handSize int) (deck, deck) {
-	return d[:handSize], d[handSize:]
+	return d[:handSize], d[handSize:] // slice the deck into two parts
 }
 
 // function to write the deck to a file
