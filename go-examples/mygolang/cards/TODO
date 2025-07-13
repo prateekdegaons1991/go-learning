@@ -1,0 +1,9 @@
+TODO List for Deck Project Functions
+
+- [x] Create a function to initialize a new deck of cards
+- [ ] Implement a function to print/display the deck
+- [ ] Write a function to shuffle the deck
+- [ ] Add a function to deal cards from the deck
+- [ ] Create a function to save the deck to a file
+- [ ] Implement a function to load the deck from a file
+- [ ] Write tests for all deck functions
