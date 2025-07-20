@@ -1,10 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+type paymenter interface {
+	pay(amount float32)
+	refund(amount float32)
+}
 
 type payment struct {
 	// This struct can be extended to include more fields related to payment if needed
-	gateway razorpay
+	gateway paymenter
 }
 
 // Open close principle: The payment struct can be extended to support new payment gateways without modifying existing code.
@@ -22,6 +29,11 @@ func (r razorpay) pay(amount float32) {
 	fmt.Println("Payment made using Razorpay:", amount)
 }
 
+func (r razorpay) refund(amount float32) {
+	// Process refund logic here
+	fmt.Println("Refund initiated using Razorpay:", amount)
+}
+
 type phonePe struct{}
 
 func (p phonePe) pay(amount float32) {
@@ -29,14 +41,19 @@ func (p phonePe) pay(amount float32) {
 	fmt.Println("Payment made using PhonePe:", amount)
 }
 
+func (p phonePe) refund(amount float32) {
+	// Process refund logic here
+	fmt.Println("Refund initiated using PhonePe:", amount)
+}
+
 func main() {
 
-	razorpayGw := razorpay{}
-	newPayment := payment{gateway: razorpayGw}
-	newPayment.makePayment(100.50)
 	phonePeGw := phonePe{}
-	newPayment.gateway = phonePeGw
-	newPayment.makePayment(200.75)
-	fmt.Println("Payment processing completed.")
+	razorpayGw := razorpay{}
+
+	phonePeGw.pay(100.50)
+	razorpayGw.pay(150.75)
+	phonePeGw.refund(50.00)
+	razorpayGw.refund(75.00)
 
 }
