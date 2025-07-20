@@ -2,31 +2,41 @@ package main
 
 import "fmt"
 
-type englishBot struct{}
-type spanishBot struct{}
+type payment struct {
+	// This struct can be extended to include more fields related to payment if needed
+	gateway razorpay
+}
+
+// Open close principle: The payment struct can be extended to support new payment gateways without modifying existing code.
+func (p payment) makePayment(amount float32) {
+	// Process payment logic here
+	// razorpayGw := razorpay{}
+	// razorpayGw.pay(amount)
+	p.gateway.pay(amount)
+}
+
+type razorpay struct{}
+
+func (r razorpay) pay(amount float32) {
+	// Process payment logic here
+	fmt.Println("Payment made using Razorpay:", amount)
+}
+
+type phonePe struct{}
+
+func (p phonePe) pay(amount float32) {
+	// Process payment logic here
+	fmt.Println("Payment made using PhonePe:", amount)
+}
 
 func main() {
-	fmt.Println("go interfaces")
 
-	// sb := spanishBot{}
+	razorpayGw := razorpay{}
+	newPayment := payment{gateway: razorpayGw}
+	newPayment.makePayment(100.50)
+	phonePeGw := phonePe{}
+	newPayment.gateway = phonePeGw
+	newPayment.makePayment(200.75)
+	fmt.Println("Payment processing completed.")
 
-	eb := englishBot{}
-	printGreeting(eb)
-	// printGreeting(sb)
-}
-
-func printGreeting(eb englishBot) {
-	fmt.Println(eb.getGreeting())
-}
-
-// func printGreeting(sb spanishBot) {
-// 	fmt.Println(sb.getGreeting())
-// }
-
-func (englishBot) getGreeting() string {
-	return "Hi there!"
-}
-
-func (spanishBot) getGreeting() string {
-	return "¡Hola!"
 }
