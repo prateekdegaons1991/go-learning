@@ -7,67 +7,56 @@ import (
 	"strings"
 )
 
-//Receivers in go
-
-// Create a new type of 'deck'
-//which is a slice of strings
+// Create a custom new type of 'deck'
+// which is a slice of strings
 
 type deck []string
 
-
-
 func newDeck() deck {
 	cards := deck{}
+	cardSuits := []string{"♠ Spades", "♦ Diamonds", "♥ Hearts", "♣ Clubs"}
+	cardValues := []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"}
 
-	cardSuites := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
-	cardValues := []string{"Ace", "Two", "Three", "Four"}
-
-	for _, suite := range cardSuites {
+	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, value+" of "+suite)
+			cards = append(cards, value+" of "+suit)
 		}
 	}
 	return cards
 }
 
-//This function is called as Receiver function
-
-func (d deck) print() {      
-	for i, card := range d {
-		fmt.Println(i, card)
+// receiver function for deck type -- prints the deck
+func (d deck) print() {
+	for _, card := range d {
+		fmt.Println(card)
 	}
 }
 
 func deal(d deck, handSize int) (deck, deck) {
-
-	rand.Shuffle(len(d), func(i int, j int) {
-		d[i], d[j] = d[j], d[i]
-	})
-	// returns two type of objects deck i.e type slice of cards deck
-	return d[:handSize], d[handSize:]
-
+	return d[:handSize], d[handSize:] // slice the deck into two parts
 }
 
-func (d deck) toString() string {
-
-	return strings.Join([]string(d), ",")
-
-}
+// function to write the deck to a file
 
 func (d deck) saveToFile(filename string) error {
-	return os.WriteFile(filename, []byte(d.toString()), 0644)
-
+	return os.WriteFile(filename, []byte(strings.Join([]string(d), ",")), 0666)
 }
 
-func newDeckFromFile(filename string) deck {
+// function to read a deck from a file
 
+func newDeckFromFile(filename string) deck {
 	bs, err := os.ReadFile(filename)
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Printf("Error reading file: %v\n", err)
 		os.Exit(1)
 	}
+	return deck(strings.Split(string(bs), ","))
+}
 
-	s := strings.Split(string(bs), ",")
-	return deck(s)
-
+// shuffle the deck of cards
+func (d deck) shuffle() {
+	for i := range d {
+		newPosition := rand.Intn(len(d))
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }

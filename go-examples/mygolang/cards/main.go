@@ -1,15 +1,16 @@
 package main
 
-import "fmt"
-
 func main() {
-	cards := newDeckFromFile("MyCards")
+	// Create a new deck of cards
+	cards := newDeck()
+	cards.shuffle()
+	cards.saveToFile("all_cards")
+	loadCards := newDeckFromFile("all_cards")
+	loadCards.print()
 
-	// hand, reminingCards := deal(cards, 5)
+	// Deal 5 cards from the deck
+	hand, remainingDeck := deal(cards, 5)
+	hand.saveToFile("hand_cards")
+	remainingDeck.saveToFile("remaining_deck")
 
-	// hand.print()
-	// reminingCards.print()
-	fmt.Println(cards)
-	// cards.saveToFile("MyCards2")
-	fmt.Println(deal(cards, 5))
 }
